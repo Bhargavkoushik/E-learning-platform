@@ -1,441 +1,278 @@
-# E-Learning Platform (MERN Stack)
+# 🎓 E-Learning Platform (MERN Stack)
 
-A modern, production-ready E-Learning platform built with the MERN stack (MongoDB, Express.js, React, Node.js) featuring a clean, responsive UI with Tailwind CSS.
+A **full-stack, production-focused E-Learning platform** built using the **MERN stack** (MongoDB, Express.js, React, Node.js) with a modern, responsive UI powered by **Tailwind CSS**.  
+The platform supports **role-based access**, **course management**, **student enrollments**, and **learning progress tracking**.
 
-## Features
+---
 
-### 🎓 For Students
-- Browse and search courses with filters (category, difficulty, search)
-- Enroll in courses (free or paid)
-- Track learning progress with progress bars
-- Watch video lessons with built-in player
-- Mark lessons as complete
-- View personalized dashboard
-- Rate and review courses
+## 🚀 Overview
 
-### 👨‍🏫 For Instructors/Admins
-- Complete course management (CRUD operations)
-- Lesson management with ordering
-- User management
-- View enrollment statistics
-- Publish/unpublish courses
+This project demonstrates real-world full-stack development concepts including authentication, authorization, RESTful APIs, frontend state management, and scalable project architecture.
 
-### 🎨 UI/UX Highlights
-- **Tailwind CSS**: Modern, utility-first styling
-- **Responsive Design**: Mobile-first approach
-- **Gradient Backgrounds**: Beautiful hero sections
-- **Smooth Animations**: Hover effects and transitions
-- **Consistent Design System**: Primary colors (Indigo/Blue)
-- **Accessibility**: Proper labels, focus states, semantic HTML
+### Key Highlights
+- JWT-based authentication with role-based access (Student / Admin)
+- Admin dashboard for course & user management
+- Student dashboard with enrolled courses & progress tracking
+- RESTful backend API with protected routes
+- Responsive, modern UI using Tailwind CSS
 
-## Tech Stack
+---
+
+## 🎯 Why This Project?
+
+This project was built to showcase:
+- End-to-end MERN stack development
+- Secure authentication & authorization workflows
+- Clean separation of frontend and backend
+- Scalable folder structure used in real-world applications
+- Practical features commonly found in e-learning platforms
+
+---
+
+## ✨ Features
+
+### 🎓 Student Features
+- Browse and search courses
+- Filter courses by category and difficulty
+- Enroll in free or paid courses
+- Watch lessons using a built-in video player
+- Track learning progress
+- View a personalized dashboard
+
+### 👨‍🏫 Admin Features
+- Create, update, and delete courses
+- Manage lessons within courses
+- Publish or unpublish courses
+- View enrollments
+- Manage users and roles
+
+### 🎨 UI / UX
+- Tailwind CSS utility-first styling
+- Fully responsive (mobile-first)
+- Reusable UI components
+- Loading and error states
+- Smooth transitions and hover effects
+
+---
+
+## 🛠 Tech Stack
 
 ### Backend
-- **Node.js** & **Express.js** - Server framework
-- **MongoDB** & **Mongoose** - Database and ODM
-- **JWT** - Authentication
-- **bcryptjs** - Password hashing
+- Node.js
+- Express.js
+- MongoDB & Mongoose
+- JWT Authentication
+- bcryptjs
 
 ### Frontend
-- **React 18** - UI library
-- **React Router v6** - Routing
-- **Axios** - HTTP client
-- **Tailwind CSS** - Styling
+- React 18
+- React Router v6
+- Axios
+- Tailwind CSS
 
-## Project Structure
+---
 
+## ⚡ Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/Bhargavkoushik/E-learning-platform.git
+cd E-learning-platform
 ```
-E-Learning Platform/
-├── backend/
-│   ├── config/
-│   │   └── db.js
-│   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── courseController.js
-│   │   ├── enrollmentController.js
-│   │   └── userController.js
-│   ├── middleware/
-│   │   └── auth.js
-│   ├── models/
-│   │   ├── User.js
-│   │   ├── Course.js
-│   │   └── Enrollment.js
-│   ├── routes/
-│   │   ├── authRoutes.js
-│   │   ├── courseRoutes.js
-│   │   ├── enrollmentRoutes.js
-│   │   └── userRoutes.js
-│   ├── .env.example
-│   ├── package.json
-│   └── server.js
-│
-└── frontend/
-    ├── public/
-    │   └── index.html
-    ├── src/
-    │   ├── components/
-    │   │   ├── common/
-    │   │   │   ├── Badge.js
-    │   │   │   ├── Button.js
-    │   │   │   ├── Card.js
-    │   │   │   ├── Input.js
-    │   │   │   ├── ProgressBar.js
-    │   │   │   └── Spinner.js
-    │   │   ├── courses/
-    │   │   │   └── CourseCard.js
-    │   │   ├── layout/
-    │   │   │   ├── Navbar.js
-    │   │   │   └── Footer.js
-    │   │   └── routes/
-    │   │       └── ProtectedRoute.js
-    │   ├── context/
-    │   │   └── AuthContext.js
-    │   ├── pages/
-    │   │   ├── Admin/
-    │   │   │   ├── Admin.js
-    │   │   │   ├── AdminCourses.js
-    │   │   │   └── AdminUsers.js
-    │   │   ├── CourseDetail.js
-    │   │   ├── Courses.js
-    │   │   ├── Dashboard.js
-    │   │   ├── Home.js
-    │   │   ├── LessonPlayer.js
-    │   │   ├── Login.js
-    │   │   └── Register.js
-    │   ├── services/
-    │   │   └── api.js
-    │   ├── App.js
-    │   ├── index.css
-    │   └── index.js
-    ├── .env.example
-    ├── package.json
-    ├── postcss.config.js
-    └── tailwind.config.js
-```
-
-## Installation & Setup
-
-### Prerequisites
-- Node.js (v14 or higher)
-- MongoDB (local or Atlas)
-- npm or yarn
 
 ### Backend Setup
 
-1. Navigate to backend directory:
 ```bash
 cd backend
-```
-
-2. Install dependencies:
-```bash
 npm install
-```
-
-3. Create `.env` file:
-```bash
-cp .env.example .env
-```
-
-4. Configure environment variables in `.env`:
-```env
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/elearning
-JWT_SECRET=your_jwt_secret_key_change_this_in_production
-NODE_ENV=development
-```
-
-5. Start the server:
-```bash
-# Development mode with nodemon
 npm run dev
+```
 
-# Production mode
+### Frontend Setup (new terminal)
+
+```bash
+cd frontend
+npm install
 npm start
 ```
 
-Server will run on `http://localhost:5000`
+* Backend runs on: `http://localhost:5000`
+* Frontend runs on: `http://localhost:3000`
 
-### Frontend Setup
+---
 
-1. Navigate to frontend directory:
-```bash
-cd frontend
+## ⚙️ Environment Variables
+
+### Backend (`backend/.env`)
+
+```env
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/elearning
+JWT_SECRET=your_secret_key
+NODE_ENV=development
 ```
 
-2. Install dependencies:
-```bash
-npm install
-```
+### Frontend (`frontend/.env`)
 
-3. Create `.env` file:
-```bash
-cp .env.example .env
-```
-
-4. Configure environment variables in `.env`:
 ```env
 REACT_APP_API_URL=http://localhost:5000/api
 ```
 
-5. Start the development server:
-```bash
-npm start
+---
+
+## 📁 Project Structure
+
+```
+E-learning-platform/
+├── backend/
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   └── server.js
+│
+└── frontend/
+    ├── public/
+    └── src/
+        ├── components/
+        ├── context/
+        ├── pages/
+        ├── services/
+        └── App.js
 ```
 
-App will run on `http://localhost:3000`
+---
 
-## API Documentation
+## 🔐 Authentication & Authorization
 
-### Authentication Endpoints
+* JWT-based authentication
+* Protected routes on frontend and backend
+* Role-based access control:
+  * **Students** → enroll & learn
+  * **Admins** → manage users & courses
 
-#### Register User
-```http
-POST /api/auth/register
-Content-Type: application/json
+---
 
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "password123"
-}
-```
+## 📡 API Overview
 
-#### Login
-```http
-POST /api/auth/login
-Content-Type: application/json
+### Authentication
 
-{
-  "email": "john@example.com",
-  "password": "password123"
-}
-```
+* `POST /api/auth/register`
+* `POST /api/auth/login`
+* `GET /api/auth/me`
 
-#### Get Current User
-```http
-GET /api/auth/me
-Authorization: Bearer <token>
-```
+### Courses
 
-### Course Endpoints
+* `GET /api/courses`
+* `GET /api/courses/:id`
+* `POST /api/courses` (Admin)
+* `PUT /api/courses/:id` (Admin)
+* `DELETE /api/courses/:id` (Admin)
 
-#### Get All Courses
-```http
-GET /api/courses?category=Programming&difficulty=Beginner&search=javascript
-```
+### Enrollments
 
-#### Get Single Course
-```http
-GET /api/courses/:id
-```
+* `POST /api/enrollments/:courseId`
+* `GET /api/enrollments`
+* `PUT /api/enrollments/:courseId/progress`
 
-#### Create Course (Admin)
-```http
-POST /api/courses
-Authorization: Bearer <admin_token>
-Content-Type: application/json
+---
 
-{
-  "title": "JavaScript Fundamentals",
-  "description": "Learn JavaScript from scratch",
-  "category": "Programming",
-  "difficulty": "Beginner",
-  "price": 49.99,
-  "thumbnail": "https://...",
-  "isPublished": true
-}
-```
+## 🧪 Testing Admin Role
 
-#### Update Course (Admin)
-```http
-PUT /api/courses/:id
-Authorization: Bearer <admin_token>
-```
+After registering a user, update their role to admin in MongoDB:
 
-#### Delete Course (Admin)
-```http
-DELETE /api/courses/:id
-Authorization: Bearer <admin_token>
-```
-
-### Enrollment Endpoints
-
-#### Enroll in Course
-```http
-POST /api/enrollments/:courseId
-Authorization: Bearer <token>
-```
-
-#### Get My Enrollments
-```http
-GET /api/enrollments
-Authorization: Bearer <token>
-```
-
-#### Update Progress
-```http
-PUT /api/enrollments/:courseId/progress
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "lessonId": "lesson_id_here"
-}
-```
-
-### User Management (Admin)
-
-#### Get All Users
-```http
-GET /api/users
-Authorization: Bearer <admin_token>
-```
-
-#### Update User
-```http
-PUT /api/users/:id
-Authorization: Bearer <admin_token>
-```
-
-#### Delete User
-```http
-DELETE /api/users/:id
-Authorization: Bearer <admin_token>
-```
-
-## Default Users for Testing
-
-After setting up, you can create an admin user manually in MongoDB or through registration and update the role to "admin".
-
-To create an admin user via MongoDB:
-```javascript
+```js
 db.users.updateOne(
   { email: "admin@example.com" },
   { $set: { role: "admin" } }
 )
 ```
 
-## UI Components
+---
 
-### Tailwind Design System
+## 🚀 Deployment
 
-**Colors:**
-- Primary: Indigo (indigo-600)
-- Secondary: Gray
-- Success: Green
-- Error: Red
-- Warning: Yellow
+### Backend Deployment (Render)
 
-**Common Components:**
-- **Button**: Multiple variants (primary, secondary, outline, danger, success)
-- **Card**: Reusable card with hover effects
-- **Input**: Form inputs with validation
-- **Badge**: Status indicators
-- **ProgressBar**: Course progress visualization
-- **Spinner**: Loading states
+The backend is deployed using **Render**.
 
-### Page Layouts
+**Steps:**
 
-**Landing Page:**
-- Hero section with gradient background
-- Feature cards in 3-column grid
-- Statistics section
-- Call-to-action sections
+1. Create a new **Web Service** on Render
+2. Connect this GitHub repository
+3. Select the `backend` folder as the root
+4. Set build & start commands:
+   ```bash
+   npm install
+   npm start
+   ```
+5. Add environment variables:
+   ```env
+   PORT=5000
+   MONGODB_URI=<your_mongodb_atlas_uri>
+   JWT_SECRET=<your_secret_key>
+   NODE_ENV=production
+   ```
+6. Deploy the service
 
-**Course Listing:**
-- Grid layout (responsive)
-- Filter bar with search, category, and difficulty
-- Course cards with hover effects
-
-**Course Detail:**
-- Two-column layout
-- Left: Course information
-- Right: Enrollment card (sticky)
-
-**Dashboard:**
-- Statistics cards
-- Enrolled courses with progress bars
-
-**Admin Panel:**
-- Tabbed interface
-- CRUD forms
-- Data tables with actions
-
-**Lesson Player:**
-- Video player (aspect-video)
-- Lesson sidebar with navigation
-- Progress tracking
-
-## Features in Detail
-
-### Authentication
-- JWT-based authentication
-- Password hashing with bcrypt
-- Protected routes on frontend and backend
-- Role-based access control (student/admin)
-
-### Course Management
-- CRUD operations for courses
-- Lesson management within courses
-- Course publishing system
-- Category and difficulty filtering
-- Search functionality
-
-### Enrollment System
-- One-click enrollment
-- Progress tracking per course
-- Lesson completion tracking
-- Progress percentage calculation
-- Course completion detection
-
-### User Experience
-- Responsive navigation with mobile menu
-- Smooth page transitions
-- Loading states with spinners
-- Error handling with user feedback
-- Optimistic UI updates
-
-## Deployment
-
-### Backend Deployment (Heroku/Railway/Render)
-
-1. Set environment variables
-2. Update MongoDB connection string
-3. Set NODE_ENV to production
-4. Deploy using platform CLI or Git
-
-### Frontend Deployment (Vercel/Netlify)
-
-1. Build the production bundle:
-```bash
-npm run build
+Backend URL:
+```
+https://<your-render-backend-url>/api
 ```
 
-2. Set environment variables:
-```env
-REACT_APP_API_URL=https://your-api-url.com/api
+---
+
+### Frontend Deployment (Vercel)
+
+The frontend is deployed using **Vercel**.
+
+**Steps:**
+
+1. Create a new project on Vercel
+2. Import this GitHub repository
+3. Select the `frontend` folder
+4. Set environment variable:
+   ```env
+   REACT_APP_API_URL=https://<your-render-backend-url>/api
+   ```
+5. Deploy the project
+
+Frontend URL:
+```
+https://<your-vercel-app>.vercel.app
 ```
 
-3. Deploy the `build` folder
+---
 
-## Future Enhancements
+### ⚠️ Important Notes
 
-- [ ] Payment integration (Stripe)
-- [ ] Video upload functionality
-- [ ] Course reviews and ratings
-- [ ] Discussion forums
-- [ ] Quiz and assessments
-- [ ] Certificates generation
-- [ ] Email notifications
-- [ ] Social authentication
-- [ ] Course preview
-- [ ] Wishlist functionality
+* Enable **CORS** on the backend for the Vercel frontend domain
+* Use **MongoDB Atlas** for production databases
+* Never commit `.env` files
+* Update frontend API URL if backend URL changes
 
-## License
+---
 
-MIT
+## 🔮 Future Enhancements
 
-## Support
+* Payment integration (Stripe)
+* Course reviews and ratings
+* Quizzes and assessments
+* Certificates generation
+* Email notifications
+* Social authentication
+* Discussion forums
 
-For support, email support@edulearn.com or open an issue on GitHub.
+---
+
+## 📜 License
+
+MIT License
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome.
+Feel free to open an issue or submit a pull request.
