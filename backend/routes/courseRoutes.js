@@ -11,21 +11,24 @@ const {
   deleteLesson,
   addReview,
 } = require('../controllers/courseController');
-const { protect, admin } = require('../middleware/auth');
+const { protect } = require('../middleware/auth');
 
 router.route('/')
-  .get(getCourses)
-  .post(protect, admin, createCourse);
+  .get(getCourses);
+  // Course creation/updates now done via direct database access
+  // .post(protect, createCourse);
 
 router.route('/:id')
-  .get(getCourse)
-  .put(protect, admin, updateCourse)
-  .delete(protect, admin, deleteCourse);
+  .get(getCourse);
+  // Course updates/deletion now done via direct database access
+  // .put(protect, updateCourse)
+  // .delete(protect, deleteCourse);
 
-router.post('/:id/lessons', protect, admin, addLesson);
-router.route('/:id/lessons/:lessonId')
-  .put(protect, admin, updateLesson)
-  .delete(protect, admin, deleteLesson);
+// Lesson management now done via direct database access
+// router.post('/:id/lessons', protect, addLesson);
+// router.route('/:id/lessons/:lessonId')
+//   .put(protect, updateLesson)
+//   .delete(protect, deleteLesson);
 
 router.post('/:id/reviews', protect, addReview);
 

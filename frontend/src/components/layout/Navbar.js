@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import Button from '../common/Button';
 
 const Navbar = () => {
-  const { user, isAuthenticated, isAdmin, logout } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -17,10 +17,6 @@ const Navbar = () => {
 
   if (isAuthenticated) {
     navLinks.push({ path: '/dashboard', label: 'Dashboard' });
-  }
-
-  if (isAdmin) {
-    navLinks.push({ path: '/admin', label: 'Admin' });
   }
 
   return (

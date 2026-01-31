@@ -7,12 +7,13 @@ const {
   updateProgress,
   getAllEnrollments,
 } = require('../controllers/enrollmentController');
-const { protect, admin } = require('../middleware/auth');
+const { protect } = require('../middleware/auth');
 
 router.get('/', protect, getMyEnrollments);
 router.post('/:courseId', protect, enrollCourse);
 router.get('/:courseId', protect, getEnrollment);
 router.put('/:courseId/progress', protect, updateProgress);
-router.get('/admin/all', protect, admin, getAllEnrollments);
+// Admin enrollment view now done via direct database access
+// router.get('/admin/all', protect, getAllEnrollments);
 
 module.exports = router;

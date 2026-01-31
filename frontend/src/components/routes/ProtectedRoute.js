@@ -16,17 +16,3 @@ export const PrivateRoute = ({ children }) => {
 
   return isAuthenticated ? children : <Navigate to="/login" />;
 };
-
-export const AdminRoute = ({ children }) => {
-  const { isAdmin, loading } = useAuth();
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        <Spinner size="lg" />
-      </div>
-    );
-  }
-
-  return isAdmin ? children : <Navigate to="/" />;
-};

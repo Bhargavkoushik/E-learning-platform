@@ -6,12 +6,14 @@ const {
   deleteUser,
   updateUser,
 } = require('../controllers/userController');
-const { protect, admin } = require('../middleware/auth');
+const { protect } = require('../middleware/auth');
 
-router.get('/', protect, admin, getUsers);
-router.route('/:id')
-  .get(protect, admin, getUserById)
-  .delete(protect, admin, deleteUser)
-  .put(protect, admin, updateUser);
+// These routes are now admin-only via direct database access
+// Keeping them but removing from API access
+// router.get('/', protect, getUsers);
+// router.route('/:id')
+//   .get(protect, getUserById)
+//   .delete(protect, deleteUser)
+//   .put(protect, updateUser);
 
 module.exports = router;

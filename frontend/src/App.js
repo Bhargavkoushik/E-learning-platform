@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-import { PrivateRoute, AdminRoute } from './components/routes/ProtectedRoute';
+import { PrivateRoute } from './components/routes/ProtectedRoute';
 
 // Pages
 import Home from './pages/Home';
@@ -13,7 +13,6 @@ import Courses from './pages/Courses';
 import CourseDetail from './pages/CourseDetail';
 import Dashboard from './pages/student/Dashboard';
 import LessonPlayer from './pages/student/LessonPlayer';
-import Admin from './pages/Admin/Admin';
 
 function App() {
   return (
@@ -44,16 +43,6 @@ function App() {
                   <PrivateRoute>
                     <LessonPlayer />
                   </PrivateRoute>
-                }
-              />
-              
-              {/* Admin Routes */}
-              <Route
-                path="/admin"
-                element={
-                  <AdminRoute>
-                    <Admin />
-                  </AdminRoute>
                 }
               />
             </Routes>

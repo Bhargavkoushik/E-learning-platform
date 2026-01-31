@@ -131,31 +131,29 @@ const seedDatabase = async () => {
     await Course.deleteMany({});
     console.log('Cleared existing courses');
 
-    // Create admin user if doesn't exist
-    let admin = await User.findOne({ email: 'admin@edulearn.com' });
-    if (!admin) {
-      admin = await User.create({
-        name: 'Admin User',
-        email: 'admin@edulearn.com',
-        password: 'admin123',
-        role: 'admin',
+    // Create a system user for course ownership (not an admin)
+    let systemUser = await User.findOne({ email: 'system@edulearn.com' });
+    if (!systemUser) {
+      systemUser = await User.create({
+        name: 'System User',
+        email: 'system@edulearn.com',
+        password: 'system123',
       });
-      console.log('Created admin user');
+      console.log('Created system user for course ownership');
     }
 
     // Create sample courses
     for (const courseData of sampleCourses) {
       await Course.create({
         ...courseData,
-        instructor: admin._id,
+        instructor: systemUser._id,
       });
     }
 
     console.log('✅ Sample data seeded successfully!');
-    console.log('\nAdmin Credentials:');
-    console.log('Email: admin@edulearn.com');
-    console.log('Password: admin123');
     console.log(`\nCreated ${sampleCourses.length} sample courses`);
+    console.log('\nNote: Course management is now done via direct database access.');
+    console.log('Use MongoDB Compass or similar tools to add/update courses.');
 
     process.exit(0);
   } catch (error) {
