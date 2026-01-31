@@ -6,6 +6,12 @@ import Button from '../components/common/Button';
 import Badge from '../components/common/Badge';
 import Spinner from '../components/common/Spinner';
 
+const getDifficultyVariant = (difficulty) => {
+  if (difficulty?.toLowerCase().includes('beginner')) return 'success';
+  if (difficulty?.toLowerCase().includes('advanced')) return 'danger';
+  return 'warning';
+};
+
 const CourseDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -51,8 +57,8 @@ const CourseDetail = () => {
 
     try {
       setEnrolling(true);
-      const response = await enrollmentAPI.enrollCourse(id);
-      setEnrollment(response.data.data || response.data); // Update enrollment state immediately
+      const { data } = await enrollmentAPI.enrollCourse(id);
+      setEnrollment(data); // Update enrollment state immediately
       
       // Open YouTube video in a new window with specific size
       if (course.lessons && course.lessons.length > 0) {
@@ -118,10 +124,7 @@ const CourseDetail = () => {
             <div className="bg-white rounded-lg shadow-md p-6 mb-6">
               <div className="flex flex-wrap gap-2 mb-4">
                 <Badge variant="primary">{course.category}</Badge>
-                <Badge variant={
-                  course.difficulty?.toLowerCase().includes('beginner') ? 'success' :
-                  course.difficulty?.toLowerCase().includes('advanced') ? 'danger' : 'warning'
-                }>
+                <Badge variant={getDifficultyVariant(course.difficulty)}>
                   {course.difficulty}
                 </Badge>
               </div>
@@ -281,7 +284,12 @@ const CourseDetail = () => {
                   loading={enrolling}
                   disabled={enrolling}
                 >
-                  {enrolling ? 'Enrolling...' : (course.price === 0 ? 'Enroll Now' : 'Buy Now')}
+                  {enrolling 
+                    ? 'Enrolling...' 
+                    : course.price === 0 
+                      ? 'Enroll Now' 
+                      : 'Buy Now'
+                  }
                 </Button>
               )}
 

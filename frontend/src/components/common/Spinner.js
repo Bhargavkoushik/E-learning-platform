@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Spinner = ({ size = 'md', className = '' }) => {
   const sizes = {
@@ -31,6 +32,11 @@ const Spinner = ({ size = 'md', className = '' }) => {
       </svg>
     </div>
   );
+};
+
+Spinner.propTypes = {
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  className: PropTypes.string,
 };
 
 export default Spinner;

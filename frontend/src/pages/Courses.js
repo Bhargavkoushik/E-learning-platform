@@ -14,38 +14,39 @@ const Courses = () => {
   });
 
   useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        setLoading(true);
+
+        const params = {};
+        if (filters.category !== 'all') params.category = filters.category;
+        if (filters.difficulty !== 'all') params.difficulty = filters.difficulty;
+        if (filters.search) params.search = filters.search;
+
+        const { data } = await courseAPI.getCourses(params);
+        setCourses(data);
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchCourses();
   }, [filters]);
 
-  const fetchCourses = async () => {
-    try {
-      setLoading(true);
-      const params = {};
-      if (filters.category !== 'all') params.category = filters.category;
-      if (filters.difficulty !== 'all') params.difficulty = filters.difficulty;
-      if (filters.search) params.search = filters.search;
-
-      const { data } = await courseAPI.getCourses(params);
-      setCourses(data);
-    } catch (error) {
-      console.error('Error fetching courses:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleFilterChange = (e) => {
-    setFilters({
-      ...filters,
+    setFilters((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
   const handleSearch = (e) => {
-    setFilters({
-      ...filters,
+    setFilters((prev) => ({
+      ...prev,
       search: e.target.value,
-    });
+    }));
   };
 
   const categories = [
@@ -87,46 +88,42 @@ const Courses = () => {
         <div className="bg-white rounded-lg shadow-md p-4 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Search */}
-            <div>
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search courses..."
-                  name="search"
-                  value={filters.search}
-                  onChange={handleSearch}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                />
-                <svg
-                  className="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </div>
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search courses..."
+                name="search"
+                value={filters.search}
+                onChange={handleSearch}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              />
+              <svg
+                className="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
             </div>
 
-            {/* Category Filter */}
+            {/* Category */}
             <Select
               name="category"
               value={filters.category}
               onChange={handleFilterChange}
               options={categories}
-              className="mb-0"
             />
 
-            {/* Difficulty Filter */}
+            {/* Difficulty */}
             <Select
               name="difficulty"
               value={filters.difficulty}
               onChange={handleFilterChange}
               options={difficulties}
-              className="mb-0"
             />
           </div>
         </div>
@@ -138,20 +135,9 @@ const Courses = () => {
           </div>
         ) : courses.length === 0 ? (
           <div className="text-center py-20">
-            <svg
-              className="mx-auto h-16 w-16 text-gray-400 mb-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No courses found</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">
+              No courses found
+            </h3>
             <p className="text-gray-600">Try adjusting your filters</p>
           </div>
         ) : (

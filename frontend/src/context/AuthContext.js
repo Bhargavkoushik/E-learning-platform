@@ -1,4 +1,5 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { authAPI } from '../services/api';
 
 const AuthContext = createContext();
@@ -26,6 +27,7 @@ export const AuthProvider = ({ children }) => {
         const { data } = await authAPI.getMe();
         setUser(data);
       } catch (error) {
+        console.error('Authentication error:', error);
         localStorage.removeItem('token');
       }
     }
@@ -55,7 +57,7 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
   };
 
-  const value = {
+  const value = useMemo(() => ({
     user,
     loading,
     login,
@@ -63,7 +65,11 @@ export const AuthProvider = ({ children }) => {
     logout,
     updateUser,
     isAuthenticated: !!user,
-  };
+  }), [user, loading]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
